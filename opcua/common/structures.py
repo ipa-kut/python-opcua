@@ -63,7 +63,7 @@ class {0}(IntEnum):
 """.format(self.name)
 
         for EnumeratedValue in self.fields:
-            name = _clean_name(EnumeratedValue.Name)
+            name = EnumeratedValue.Name
             value = EnumeratedValue.Value
             code += "    {} = {}\n".format(name, value)
 
@@ -299,6 +299,7 @@ def _clean_name(name):
     """
     name = re.sub(r'\W+', '_', name)
     name = re.sub(r'\.', '_', name)
+    name = re.sub(r'\\', '_', name)
     name = re.sub(r'"', '_', name)
     name = re.sub(r'^[0-9]+', r'_\g<0>', name)
 
